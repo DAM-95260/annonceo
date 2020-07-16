@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\AnnonceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,7 +24,7 @@ class Annonce
     private $titre;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -33,12 +34,12 @@ class Annonce
     private $prix;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=255)
      */
     private $codePostale;
 
@@ -53,12 +54,14 @@ class Annonce
     private $creation;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToOne(targetEntity=Categorie::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $auteur;
 
@@ -84,7 +87,7 @@ class Annonce
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -151,24 +154,24 @@ class Annonce
         return $this;
     }
 
-    public function getCategorie(): ?string
+    public function getCategorie(): ?Categorie
     {
         return $this->categorie;
     }
 
-    public function setCategorie(string $categorie): self
+    public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function getAuteur(): ?string
+    public function getAuteur(): ?Utilisateur
     {
         return $this->auteur;
     }
 
-    public function setAuteur(string $auteur): self
+    public function setAuteur(?Utilisateur $auteur): self
     {
         $this->auteur = $auteur;
 
