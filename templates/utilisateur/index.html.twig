@@ -1,23 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Utilisateur index{% endblock %}
+{% block title %}
+    Liste des Utilisateur
+{% endblock %}
 
-{% block body %}
-    <h1>Utilisateur index</h1>
+{% block content %}
+    <h1>Liste des utilisateurs</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
+                <th>Rôles</th>
                 <th>Pseudo</th>
-                <th>Prenom</th>
+                <th>Prénom</th>
                 <th>Nom</th>
-                <th>Telephone</th>
-                <th>Inscription</th>
-                <th>actions</th>
+                <th>Téléphone</th>
+                <th>Date d'inscription</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -26,15 +27,14 @@
                 <td>{{ utilisateur.id }}</td>
                 <td>{{ utilisateur.email }}</td>
                 <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
-                <td>{{ utilisateur.password }}</td>
                 <td>{{ utilisateur.pseudo }}</td>
                 <td>{{ utilisateur.prenom }}</td>
                 <td>{{ utilisateur.nom }}</td>
                 <td>{{ utilisateur.telephone }}</td>
-                <td>{{ utilisateur.inscription ? utilisateur.inscription|date('Y-m-d') : '' }}</td>
+                <td>{{ utilisateur.inscription ? utilisateur.inscription|date('d-m-Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('utilisateur_show', {'id': utilisateur.id}) }}">show</a>
-                    <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
+                    <a  class="btn btn-primary" href="{{ path('utilisateur_show', {'id': utilisateur.id}) }}">Afficher</a>
+                    <a class="btn btn-success" href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -45,5 +45,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('utilisateur_new') }}">Create new</a>
+    <a href="{{ path('utilisateur_new') }}">Créer un utilisateur</a>
 {% endblock %}
